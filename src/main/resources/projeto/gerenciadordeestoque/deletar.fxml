@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="deletarPane" prefHeight="756.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.gerenciadordeestoque.controllers.DeletarController">
+   <children>
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="40.0" prefHeight="69.0" prefWidth="1016.0">
+         <children>
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#onClickCadastrar" text="Cadastrar">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Separator prefWidth="8.0" />
+            <Button fx:id="btnPesquisar" mnemonicParsing="false" onAction="#onClickPesquisar" text="Pesquisar">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Separator prefWidth="8.0" />
+            <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#onClickAtualizar" text="Atualizar item">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Separator prefWidth="8.0" />
+            <Button fx:id="btnDeletar" mnemonicParsing="false" text="Deletar">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Separator prefWidth="8.0" />
+            <Button fx:id="btnGrafico" mnemonicParsing="false" onAction="#onClickGrafico" text="Gráfico">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="402.0" layoutY="175.0" text="Deletar Produto" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="63.0" layoutY="284.0" prefHeight="61.0" prefWidth="1016.0">
+         <children>
+            <VBox prefHeight="61.0" prefWidth="176.0">
+               <children>
+                  <Label text="Digite o ID do Produto:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfID" prefHeight="25.0" prefWidth="56.0" />
+               </children>
+            </VBox>
+            <Separator prefWidth="16.0" />
+            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" text="Deletar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="lbAviso" layoutX="447.0" layoutY="366.0" text="Mensagem de Sucesso ou Fracasso">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@css/global.css" />
+      <URL value="@css/pesquisar.css" />
+   </stylesheets>
+</AnchorPane>
