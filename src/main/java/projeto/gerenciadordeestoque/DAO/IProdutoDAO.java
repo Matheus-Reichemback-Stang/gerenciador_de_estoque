@@ -10,7 +10,7 @@ public interface IProdutoDAO {
 
     public Integer atualizar(Produto produto) throws Exception;
 
-    public Produto buscar(Long id) throws Exception;
+    public Produto buscar(String codigo) throws Exception;
 
     public List<Produto> buscarTodos() throws Exception;
 

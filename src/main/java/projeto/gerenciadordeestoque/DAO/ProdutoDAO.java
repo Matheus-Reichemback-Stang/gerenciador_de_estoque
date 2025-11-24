@@ -46,7 +46,7 @@ public class ProdutoDAO implements IProdutoDAO{
     }
 
     @Override
-    public Produto buscar(Long id) throws Exception {
+    public Produto buscar(String codigo) throws Exception {
         Connection connetion = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -55,17 +55,19 @@ public class ProdutoDAO implements IProdutoDAO{
             connetion = ConnectionFactory.getConnection();
             String sql = getSqlSelect();
             stm = connetion.prepareStatement(sql);
-            adicionarParametrosSelect(stm, id);
+            adicionarParametrosSelect(stm, codigo);
             rs = stm.executeQuery();
             if(rs.next()){
                 produto = new Produto();
-                Long id_db = rs.getLong("ID");
+                Long id = rs.getLong("ID");
+                String codigo_db = rs.getString("CODIGO");
                 String nome = rs.getString("NOME");
                 String marca = rs.getString("MARCA");
                 String categoria = rs.getString("CATEGORIA");
                 Integer quantidade = rs.getInt("QUANTIDADE");
                 Double precoUnidade = rs.getDouble("PRECO_UNIDADE");
-                produto.setId(id_db);
+                produto.setId(id);
+                produto.setCodigo(codigo_db);
                 produto.setNome(nome);
                 produto.setMarca(marca);
                 produto.setCategoria(categoria);
@@ -112,12 +114,14 @@ public class ProdutoDAO implements IProdutoDAO{
             while(rs.next()){
                 Produto produto = new Produto();
                 Long id = rs.getLong("ID");
+                String codigo = rs.getString("CODIGO");
                 String nome = rs.getString("NOME");
                 String marca = rs.getString("MARCA");
                 String categoria = rs.getString("CATEGORIA");
                 Integer quantidade = rs.getInt("QUANTIDADE");
                 Double precoUnidade = rs.getDouble("PRECO_UNIDADE");
                 produto.setId(id);
+                produto.setCodigo(codigo);
                 produto.setNome(nome);
                 produto.setMarca(marca);
                 produto.setCategoria(categoria);
@@ -154,8 +158,8 @@ public class ProdutoDAO implements IProdutoDAO{
 
     private String getSqlInsert() {
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO tb_produto (ID, NOME, MARCA, CATEGORIA, QUANTIDADE, PRECO_UNIDADE, PRECO_TOTAL) ");
-        sb.append("VALUES (nextval('sq_produto'), ?, ?, ?, ?, ?, ?)");
+        sb.append("INSERT INTO tb_produto (ID, NOME, MARCA, CATEGORIA, QUANTIDADE, PRECO_UNIDADE, PRECO_TOTAL, CODIGO) ");
+        sb.append("VALUES (nextval('sq_produto'), ?, ?, ?, ?, ?, ?, ?)");
         return sb.toString();
     }
 
@@ -166,12 +170,13 @@ public class ProdutoDAO implements IProdutoDAO{
         stm.setInt(4, produto.getQuantidade());
         stm.setDouble(5, produto.getPrecoUnidade());
         stm.setDouble(6, produto.getPrecoTotal());
+        stm.setString(7, produto.getCodigo());
     }
 
     private String getSqlUpdate() {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE tb_produto ");
-        sb.append("SET NOME = ?, MARCA = ?, CATEGORIA = ?, QUANTIDADE = ?, PRECO_UNIDADE = ?, PRECO_TOTAL = ? ");
+        sb.append("SET NOME = ?, MARCA = ?, CATEGORIA = ?, QUANTIDADE = ?, PRECO_UNIDADE = ?, PRECO_TOTAL = ?, CODIGO = ? ");
         sb.append("WHERE ID = ?");
         return sb.toString();
     }
@@ -183,18 +188,20 @@ public class ProdutoDAO implements IProdutoDAO{
         stm.setInt(4, produto.getQuantidade());
         stm.setDouble(5, produto.getPrecoUnidade());
         stm.setDouble(6, produto.getPrecoTotal());
-        stm.setLong(7, produto.getId());
+        stm.setString(7, produto.getCodigo());
+        stm.setLong(8, produto.getId());
+
     }
 
     private String getSqlSelect() {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM tb_produto ");
-        sb.append("WHERE id = ?");
+        sb.append("WHERE codigo = ?");
         return sb.toString();
     }
 
-    private void adicionarParametrosSelect(PreparedStatement stm, Long id) throws SQLException {
-        stm.setLong(1, id);
+    private void adicionarParametrosSelect(PreparedStatement stm, String codigo) throws SQLException {
+        stm.setString(1, codigo);
     }
 
     private String getSqlDelete() {

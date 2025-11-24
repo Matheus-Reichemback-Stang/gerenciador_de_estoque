@@ -4,6 +4,8 @@ public class Produto {
 
     private Long id;
 
+    private String codigo;
+
     private String nome;
 
     private String marca;
@@ -20,7 +22,8 @@ public class Produto {
 
     }
 
-    public Produto(String nome, String marca, String categoria, int quantidade, double precoUnidade) {
+    public Produto(String codigo, String nome, String marca, String categoria, int quantidade, double precoUnidade) {
+        this.codigo = codigo;
         this.nome = nome;
         this.marca = marca;
         this.categoria = categoria;
@@ -35,6 +38,14 @@ public class Produto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
