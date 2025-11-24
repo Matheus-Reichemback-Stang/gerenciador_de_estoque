@@ -57,7 +57,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="tfNome" prefHeight="25.0" prefWidth="225.0" />
-                  <Label text="Marca do Produto:">
+                  <Label text="Marca do Produto (opcional):">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -95,6 +95,12 @@
                                  </font>
                               </Label>
                               <TextField fx:id="tfPrecoUnidade" prefHeight="25.0" prefWidth="225.0" />
+                              <Label text="Código (único):">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfCodigo" prefHeight="25.0" prefWidth="225.0" />
                            </children>
                         </VBox>
                      </children>
@@ -102,12 +108,12 @@
                </children>
             </VBox>
          </children></HBox>
-      <Button fx:id="btnAdicionarProduto" layoutX="483.0" layoutY="471.0" mnemonicParsing="false" text="Cadastrar Produto">
+      <Button fx:id="btnAdicionarProduto" layoutX="483.0" layoutY="471.0" mnemonicParsing="false" onAction="#onClickCadastrar" text="Cadastrar Produto">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="lbAviso" layoutX="458.0" layoutY="526.0" text="Resultado se foi cadastrado" textAlignment="CENTER">
+      <Label fx:id="lbAviso" layoutX="248.0" layoutY="526.0" prefHeight="36.0" prefWidth="632.0">
          <font>
             <Font size="18.0" />
          </font>

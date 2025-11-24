@@ -29,7 +29,7 @@ cinza-escuro: #222f3e
     -fx-text-fill: #222f3e;
 }
 
-Label {
-    -fx-text-fill: #f5f6fa;
-    -fx-font-weight: bold;
-}
+/*Label {*/
+/*    -fx-text-fill: #f5f6fa;*/
+/*    -fx-font-weight: bold;*/
+/*}*/

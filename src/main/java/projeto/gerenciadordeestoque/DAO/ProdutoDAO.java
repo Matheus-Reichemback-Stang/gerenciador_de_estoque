@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO implements IProdutoDAO{
+
+    public ProdutoDAO() {};
+
     @Override
     public Integer cadastrar(Produto produto) throws Exception {
         Connection connection = null;
