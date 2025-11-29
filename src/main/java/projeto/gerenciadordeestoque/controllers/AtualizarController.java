@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import projeto.gerenciadordeestoque.DAO.IProdutoDAO;
+import projeto.gerenciadordeestoque.DAO.ProdutoDAO;
 import projeto.gerenciadordeestoque.MainApplication;
 import projeto.gerenciadordeestoque.entity.Produto;
 
@@ -15,6 +17,10 @@ import java.io.IOException;
 public class AtualizarController {
 
     private Stage stage;
+
+    private IProdutoDAO produtoDAO = new ProdutoDAO();
+
+    private Produto produtoDB = null;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -37,7 +43,9 @@ public class AtualizarController {
 
     // Campo de Busca
     @FXML
-    public TextField tfID;
+    public TextField tfCodigo;
+    @FXML
+    public Label lbAvisoBuscar;
 
     // Campos de dados coletados
     @FXML
@@ -50,6 +58,8 @@ public class AtualizarController {
     public TextField tfQuantidade;
     @FXML
     public TextField tfPreco;
+    @FXML
+    public Label lbAvisoSalvar;
 
 
     @FXML
@@ -62,6 +72,10 @@ public class AtualizarController {
         btnDeletar.getStyleClass().add("button");
         btnGrafico.getStyleClass().add("button");
         btnAtualizar.getStyleClass().add("active");
+
+        // Definindo escolhas no ComboBox
+        cbCategoria.getItems().addAll("Frutas", "Verduras", "Legumes", "Grãos", "Carnes", "Peixes", "Laticínios", "Pães", "Massas", "Doces", "Bebidas");
+        cbCategoria.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -102,5 +116,101 @@ public class AtualizarController {
         controller.setStage(stage);
         Scene scene = stage.getScene();
         scene.setRoot(root);
+    }
+
+    private boolean isCampoVazio(TextField tf) {
+        if(tf.getText().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isInteger(TextField tf) {
+        try {
+            Integer.parseInt(tf.getText());
+            return true;
+        } catch(NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isDouble(TextField tf) {
+        try {
+            Double.parseDouble(tf.getText());
+            return true;
+        } catch(NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void clearFields() {
+        produtoDB = null;
+        tfCodigo.clear();
+        tfNome.clear();
+        tfMarca.clear();
+        tfQuantidade.clear();
+        tfPreco.clear();
+        cbCategoria.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void onClickBuscar() throws Exception {
+        lbAvisoBuscar.setText("");
+        lbAvisoSalvar.setText("");
+        if(isCampoVazio(tfCodigo)) {
+            lbAvisoBuscar.setText("Preencha o campo com o código do produto");
+        } else {
+            String codigo =  tfCodigo.getText();
+            produtoDB = produtoDAO.buscar(codigo);
+
+            if(produtoDB == null){
+                lbAvisoBuscar.setText("Não existe um produto com este código");
+            } else {;
+                tfNome.setText(produtoDB.getNome());
+                tfMarca.setText(produtoDB.getMarca());
+                cbCategoria.setValue(produtoDB.getCategoria());
+                tfQuantidade.setText(String.valueOf(produtoDB.getQuantidade()));
+                tfPreco.setText(String.valueOf(produtoDB.getPrecoUnidade()));
+            }
+        }
+    }
+
+    @FXML
+    public void onClickCancelar() {
+        clearFields();
+    }
+
+    @FXML
+    public void onClickSalvar() throws Exception {
+        if(isCampoVazio(tfNome) || isCampoVazio(tfQuantidade) || isCampoVazio(tfPreco)) {
+            lbAvisoSalvar.setText("É preciso preencher os campos obrigatórios!");
+        } else if(!isInteger(tfQuantidade)) {
+            lbAvisoSalvar.setText("O campo Quantidade só aceita NÚMEROS INTEIROS!");
+        } else if(!isDouble(tfPreco)) {
+            lbAvisoSalvar.setText("O campo Preço só aceita NÚMEROS DECIMAIS!");
+        } else {
+            String nome = tfNome.getText();
+            String marca = tfMarca.getText();
+            String categoria = cbCategoria.getValue();
+            int quantidade = Integer.parseInt(tfQuantidade.getText());
+            double precoUnidade = Double.parseDouble(tfPreco.getText());
+
+            produtoDB.setNome(nome);
+            produtoDB.setMarca(marca);
+            produtoDB.setCategoria(categoria);
+            produtoDB.setQuantidade(quantidade);
+            produtoDB.setPrecoUnidade(precoUnidade);
+            produtoDB.setPrecoTotal(precoUnidade, quantidade);
+
+            Integer linhaAtualizar = produtoDAO.atualizar(produtoDB);
+
+            if(linhaAtualizar == 1){
+                lbAvisoSalvar.setText("Produto atualizado com sucessso!");
+                clearFields();
+            } else {
+                lbAvisoSalvar.setText("Houve um erro ao atualizar o produto!");
+            }
+        }
     }
 }

@@ -54,25 +54,34 @@
       </Label>
       <HBox alignment="CENTER" layoutX="63.0" layoutY="284.0" prefHeight="61.0" prefWidth="1016.0">
          <children>
-            <VBox prefHeight="61.0" prefWidth="55.0">
+            <VBox prefHeight="61.0" prefWidth="136.0">
                <children>
-                  <Label text="ID">
+                  <Label text="Código:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tfID" prefHeight="25.0" prefWidth="56.0" />
+                  <TextField fx:id="tfCodigo" prefHeight="25.0" prefWidth="106.0" />
                </children>
             </VBox>
             <Separator prefWidth="16.0" />
-            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" text="Buscar">
+            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" onAction="#onClickBuscar" text="Buscar">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
          </children>
       </HBox>
-      <VBox alignment="CENTER" layoutX="63.0" layoutY="378.0" prefHeight="200.0" prefWidth="1016.0">
+      <HBox alignment="CENTER" layoutX="63.0" layoutY="345.0" prefHeight="36.0" prefWidth="1016.0">
+         <children>
+            <Label fx:id="lbAvisoBuscar" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="64.0" layoutY="394.0" prefHeight="200.0" prefWidth="1016.0">
          <children>
             <Label text="DADOS COLETADOS" textAlignment="CENTER">
                <font>
@@ -91,7 +100,7 @@
                         </Label>
                         <TextField fx:id="tfNome" />
                         <Separator orientation="VERTICAL" prefHeight="8.0" />
-                        <Label text="Marca:" textAlignment="CENTER">
+                        <Label text="Marca (opcional):" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -137,13 +146,13 @@
                         <Separator orientation="VERTICAL" prefHeight="16.0" />
                         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="240.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Cancelar">
+                              <Button mnemonicParsing="false" onAction="#onClickCancelar" text="Cancelar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Button>
                               <Separator prefWidth="16.0" />
-                              <Button mnemonicParsing="false" text="Salvar">
+                              <Button mnemonicParsing="false" onAction="#onClickSalvar" text="Salvar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -156,6 +165,15 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER" layoutX="63.0" layoutY="615.0" prefHeight="36.0" prefWidth="1016.0">
+         <children>
+            <Label fx:id="lbAvisoSalvar">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
