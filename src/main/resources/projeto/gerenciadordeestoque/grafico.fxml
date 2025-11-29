@@ -50,14 +50,14 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <PieChart fx:id="pcProdutoQtd" layoutX="208.0" layoutY="262.0" prefHeight="350.0" prefWidth="350.0" />
-      <Label fx:id="lbProdutoQtd" layoutX="296.0" layoutY="617.0" text="Produto por Quantidade">
+      <PieChart fx:id="pcProdutoQtd" layoutX="117.0" layoutY="273.0" prefHeight="380.0" prefWidth="380.0" />
+      <Label fx:id="lbProdutoQtd" layoutX="220.0" layoutY="686.0" text="Produto por Quantidade">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <PieChart fx:id="pcCategoriaQtd" layoutX="566.0" layoutY="262.0" prefHeight="350.0" prefWidth="350.0" />
-      <Label fx:id="lbCategoriaQtd" layoutX="649.0" layoutY="617.0" text="Categoria por Quantidade">
+      <PieChart fx:id="pcCategoriaQtd" layoutX="624.0" layoutY="273.0" prefHeight="380.0" prefWidth="380.0" />
+      <Label fx:id="lbCategoriaQtd" layoutX="722.0" layoutY="686.0" text="Categoria por Quantidade">
          <font>
             <Font size="16.0" />
          </font>

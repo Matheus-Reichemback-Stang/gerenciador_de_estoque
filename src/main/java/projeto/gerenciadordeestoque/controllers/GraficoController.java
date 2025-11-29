@@ -89,9 +89,9 @@ public class GraficoController {
             for(Produto produto : produtos) {
                 String produtoNome;
                 if(produto.getMarca() != null){
-                    produtoNome = produto.getNome() + " " + produto.getMarca() + " - " + produto.getQuantidade();
+                    produtoNome = produto.getNome() + " " + produto.getMarca();
                 } else {
-                    produtoNome = produto.getNome() + " - " + produto.getQuantidade();
+                    produtoNome = produto.getNome();
                 }
                 Integer quantidade = produto.getQuantidade();
                 pcProdutoQtd.getData().add(new PieChart.Data(produtoNome, quantidade));
@@ -117,8 +117,8 @@ public class GraficoController {
         btnGrafico.getStyleClass().add("active");
 
 
-        setGraphicSize(pcCategoriaQtd, 350);
-        setGraphicSize(pcProdutoQtd, 350);
+        //setGraphicSize(pcCategoriaQtd, 350);
+        //setGraphicSize(pcProdutoQtd, 350);
         setDataCategoriaQtd(pcCategoriaQtd);
         setDataProdutoQtd(pcProdutoQtd);
 
