@@ -166,7 +166,7 @@ public class AtualizarController {
         if(isCampoVazio(tfCodigo)) {
             lbAvisoBuscar.setText("Preencha o campo com o código do produto");
         } else {
-            String codigo =  tfCodigo.getText();
+            String codigo =  tfCodigo.getText().toUpperCase();
             produtoDB = produtoDAO.buscar(codigo);
 
             if(produtoDB == null){

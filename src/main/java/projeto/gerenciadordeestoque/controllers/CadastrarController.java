@@ -174,7 +174,7 @@ public class CadastrarController {
 
                 Integer quantidade = Integer.parseInt(tfQuantidade.getText());
                 Double  precoUnidade = Double.parseDouble(tfPrecoUnidade.getText());
-                Produto produtoNovo = new Produto(tfCodigo.getText(), tfNome.getText(), tfMarca.getText(), cbCategoria.getValue(), quantidade, precoUnidade );
+                Produto produtoNovo = new Produto(tfCodigo.getText().toUpperCase(), tfNome.getText(), tfMarca.getText(), cbCategoria.getValue(), quantidade, precoUnidade );
                 Integer linhaCadastro = produtoDAO.cadastrar(produtoNovo);
 
                 if(linhaCadastro == 1) {

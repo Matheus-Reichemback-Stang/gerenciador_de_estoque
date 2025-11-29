@@ -108,7 +108,7 @@ public class DeletarController {
         if(tfCodigo.getText().isEmpty()) {
             lbAviso.setText("O campo precisa ser preenchido com o código do produto!");
         } else {
-            String codigo = tfCodigo.getText();
+            String codigo = tfCodigo.getText().toUpperCase();
             Produto proudutoDB = produtoDAO.buscar(codigo);
 
             if(proudutoDB == null) {
