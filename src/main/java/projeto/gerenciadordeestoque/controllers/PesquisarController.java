@@ -1,20 +1,33 @@
 package projeto.gerenciadordeestoque.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import projeto.gerenciadordeestoque.DAO.IProdutoDAO;
+import projeto.gerenciadordeestoque.DAO.ProdutoDAO;
 import projeto.gerenciadordeestoque.MainApplication;
 import projeto.gerenciadordeestoque.entity.Produto;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class PesquisarController {
 
     private Stage stage;
+
+    private IProdutoDAO produtoDAO = new ProdutoDAO();
+
+    private ObservableList<Produto> listaCompleta = FXCollections.observableArrayList();
+    private ObservableList<Produto> listaFiltrada = FXCollections.observableArrayList();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -47,8 +60,12 @@ public class PesquisarController {
     // Tabela
     @FXML
     public TableView<Produto> tvProdutos;
+
+    //Colunas da Tabela
     @FXML
     public TableColumn<Produto, Long> colID;
+    @FXML
+    public TableColumn<Produto, String> colCodigo;
     @FXML
     public TableColumn<Produto, String> colNome;
     @FXML
@@ -62,8 +79,17 @@ public class PesquisarController {
     @FXML
     public TableColumn<Produto, Double> colPrecoTotal;
 
+    private void setProdutosInObservableList(ObservableList<Produto> listaDeProdutos) throws Exception {
+        List<Produto> produtosDB = produtoDAO.buscarTodos();
+        if(produtosDB != null){
+            for(Produto produto : produtosDB) {
+                listaDeProdutos.add(produto);
+            }
+        }
+    }
+
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
         // Definindo classes CSS
         pesquisarPane.getStyleClass().add("screen");
         btnCadastrar.getStyleClass().add("button");
@@ -75,8 +101,25 @@ public class PesquisarController {
         btnPesquisarPorItem.getStyleClass().add("btnPesquisar");
 
         // Adicionando itens no campo de seleção
-        cbCategoria.getItems().addAll("Frutas", "Verduras", "Legumes", "Grãos", "Carnes", "Peixes", "Laticínios", "Pães", "Massas", "Doces", "Bebidas");
+        cbCategoria.getItems().addAll("Todos", "Frutas", "Verduras", "Legumes", "Grãos", "Carnes", "Peixes", "Laticínios", "Pães", "Massas", "Doces", "Bebidas");
         cbCategoria.getSelectionModel().selectFirst();
+
+        // Ligando as colunas com os atributos da classe Produto
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colPrecoUnidade.setCellValueFactory(new PropertyValueFactory<>("precoUnidade"));
+        colPrecoTotal.setCellValueFactory(new PropertyValueFactory<>("precoTotal"));
+
+        // Definindo so produtos do banco de dados no ObservableList
+        setProdutosInObservableList(listaCompleta);
+        setProdutosInObservableList(listaFiltrada);
+
+        // Aplicando a lista do ObservableList na tabela
+        tvProdutos.setItems(listaFiltrada);
     }
 
     @FXML
@@ -117,5 +160,41 @@ public class PesquisarController {
         controller.setStage(stage);
         Scene scene = stage.getScene();
         scene.setRoot(root);
+    }
+
+    @FXML
+    public void onClickPesquisarPorItem() {
+        String categoria = cbCategoria.getValue();
+        String nome = tfNome.getText().toLowerCase();
+
+        if(categoria.equals("Todos") && nome.isEmpty()) {
+            listaFiltrada.clear();
+            listaFiltrada.addAll(listaCompleta);
+        } else if(categoria.equals("Todos")) {
+            listaFiltrada.clear();
+            for(Produto produto : listaCompleta) {
+                String nomeProduto = produto.getNome().toLowerCase();
+                if(nomeProduto.contains(nome)) {
+                    listaFiltrada.add(produto);
+                }
+            }
+        }  else if(nome.isEmpty()) {
+            listaFiltrada.clear();
+            for(Produto produto : listaCompleta) {
+                if(produto.getCategoria().equals(categoria)) {
+                    listaFiltrada.add(produto);
+                }
+            }
+        } else {
+            listaFiltrada.clear();
+            for(Produto produto : listaCompleta) {
+                String nomeProduto = produto.getNome().toLowerCase();
+                String categoriaProduto = produto.getCategoria();
+                if(nomeProduto.contains(nome) &&  categoriaProduto.equals(categoria)) {
+                    listaFiltrada.add(produto);
+                }
+            }
+        }
+
     }
 }

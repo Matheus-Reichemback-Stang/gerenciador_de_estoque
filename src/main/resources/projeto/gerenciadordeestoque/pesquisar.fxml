@@ -78,22 +78,23 @@
                </children>
             </VBox>
             <Separator prefWidth="16.0" />
-            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" text="Pesquisar">
+            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" onAction="#onClickPesquisarPorItem" text="Pesquisar">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="tvProdutos" layoutX="210.0" layoutY="408.0" prefHeight="280.0" prefWidth="716.0">
+      <TableView fx:id="tvProdutos" layoutX="154.0" layoutY="404.0" prefHeight="280.0" prefWidth="834.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="39.0" text="ID" />
-          <TableColumn fx:id="colNome" prefWidth="191.0" text="Nome" />
-            <TableColumn fx:id="colMarca" prefWidth="133.0" text="Marca" />
-            <TableColumn fx:id="colCategoria" prefWidth="103.0" text="Categoria" />
-            <TableColumn fx:id="colQuantidade" prefWidth="39.0" text="Qtd" />
-            <TableColumn fx:id="colPrecoUnidade" prefWidth="113.0" text="Preço Unidade" />
-            <TableColumn fx:id="colPrecoTotal" prefWidth="97.0" text="Preço Total" />
+          <TableColumn fx:id="colID" prefWidth="42.0" text="ID" />
+          <TableColumn fx:id="colCodigo" prefWidth="93.0" text="Código" />
+            <TableColumn fx:id="colNome" prefWidth="183.0" text="Nome" />
+            <TableColumn fx:id="colMarca" prefWidth="116.0" text="Marca" />
+            <TableColumn fx:id="colCategoria" prefWidth="116.0" text="Categoria" />
+            <TableColumn fx:id="colQuantidade" prefWidth="54.0" text="Qtd" />
+            <TableColumn fx:id="colPrecoUnidade" prefWidth="111.0" text="Preço Unidade" />
+            <TableColumn fx:id="colPrecoTotal" prefWidth="118.0" text="Preço Total" />
         </columns>
       </TableView>
    </children>
