@@ -99,6 +99,14 @@ public class PesquisarController {
         btnGrafico.getStyleClass().add("button");
         btnPesquisar.getStyleClass().add("active");
         btnPesquisarPorItem.getStyleClass().add("btnPesquisar");
+        colID.getStyleClass().add("table-cell");
+        colCodigo.getStyleClass().add("table-cell");
+        colNome.getStyleClass().add("table-cell");
+        colMarca.getStyleClass().add("table-cell");
+        colCategoria.getStyleClass().add("table-cell");
+        colQuantidade.getStyleClass().add("table-cell");
+        colPrecoUnidade.getStyleClass().add("table-cell");
+        colPrecoTotal.getStyleClass().add("table-cell");
 
         // Adicionando itens no campo de seleção
         cbCategoria.getItems().addAll("Todos", "Frutas", "Verduras", "Legumes", "Grãos", "Carnes", "Peixes", "Laticínios", "Pães", "Massas", "Doces", "Bebidas");

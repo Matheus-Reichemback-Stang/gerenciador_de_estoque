@@ -46,12 +46,12 @@
             </Button>
          </children>
       </HBox>
-      <Label layoutX="402.0" layoutY="175.0" text="Deletar Produto" textAlignment="CENTER">
+      <Label layoutX="381.0" layoutY="176.0" text="Deletar Produto" textAlignment="CENTER">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="63.0" layoutY="284.0" prefHeight="61.0" prefWidth="1016.0">
+      <HBox alignment="BOTTOM_CENTER" layoutX="54.0" layoutY="284.0" prefHeight="61.0" prefWidth="1016.0">
          <children>
             <VBox prefHeight="61.0" prefWidth="176.0">
                <children>
@@ -64,7 +64,7 @@
                </children>
             </VBox>
             <Separator prefWidth="16.0" />
-            <Button fx:id="btnPesquisarPorItem" mnemonicParsing="false" onAction="#onClickDeletar" text="Deletar">
+            <Button fx:id="btnDeletarItem" mnemonicParsing="false" onAction="#onClickDeletar" text="Deletar">
                <font>
                   <Font size="18.0" />
                </font>
@@ -75,7 +75,7 @@
          <children>
             <Label fx:id="lbAviso">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>
@@ -86,6 +86,6 @@
    </padding>
    <stylesheets>
       <URL value="@css/global.css" />
-      <URL value="@css/pesquisar.css" />
+      <URL value="@css/botoes.css" />
    </stylesheets>
 </AnchorPane>

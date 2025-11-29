@@ -46,6 +46,8 @@ public class DeletarController {
     @FXML
     public TextField tfCodigo;
     @FXML
+    public Button btnDeletarItem;
+    @FXML
     public Label lbAviso;
 
     @FXML
@@ -58,6 +60,7 @@ public class DeletarController {
         btnDeletar.getStyleClass().add("button");
         btnGrafico.getStyleClass().add("button");
         btnDeletar.getStyleClass().add("active");
+        btnDeletarItem.getStyleClass().add("btnCancelarDeletar");
     }
 
     @FXML

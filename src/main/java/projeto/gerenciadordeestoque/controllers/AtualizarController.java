@@ -60,6 +60,12 @@ public class AtualizarController {
     public TextField tfPreco;
     @FXML
     public Label lbAvisoSalvar;
+    @FXML
+    public Button btnPesquisarPorItem;
+    @FXML
+    public Button btnSalvar;
+    @FXML
+    public Button btnCancelar;
 
 
     @FXML
@@ -72,6 +78,9 @@ public class AtualizarController {
         btnDeletar.getStyleClass().add("button");
         btnGrafico.getStyleClass().add("button");
         btnAtualizar.getStyleClass().add("active");
+        btnPesquisarPorItem.getStyleClass().add("btnPesquisar");
+        btnSalvar.getStyleClass().add("btnSalvar");
+        btnCancelar.getStyleClass().add("btnCancelarDeletar");
 
         // Definindo escolhas no ComboBox
         cbCategoria.getItems().addAll("Frutas", "Verduras", "Legumes", "Grãos", "Carnes", "Peixes", "Laticínios", "Pães", "Massas", "Doces", "Bebidas");

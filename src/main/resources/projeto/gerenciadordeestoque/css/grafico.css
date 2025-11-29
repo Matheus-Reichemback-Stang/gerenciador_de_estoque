@@ -1,0 +1,10 @@
+.pieChart Label {
+    -fx-text-fill: #222f3e;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label {
+    -fx-fill: #f5f6fa;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

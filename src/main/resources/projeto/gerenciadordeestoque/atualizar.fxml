@@ -47,12 +47,16 @@
             </Button>
          </children>
       </HBox>
-      <Label layoutX="313.0" layoutY="176.0" text="Editar dados de Produto" textAlignment="CENTER">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER" layoutX="63.0" layoutY="284.0" prefHeight="61.0" prefWidth="1016.0">
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="150.0" prefHeight="100.0" prefWidth="1016.0">
+         <children>
+            <Label text="Editar dados de Produto" textAlignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_CENTER" layoutX="54.0" layoutY="279.0" prefHeight="61.0" prefWidth="1016.0">
          <children>
             <VBox prefHeight="61.0" prefWidth="136.0">
                <children>
@@ -72,20 +76,20 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="63.0" layoutY="345.0" prefHeight="36.0" prefWidth="1016.0">
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="340.0" prefHeight="36.0" prefWidth="1016.0">
          <children>
             <Label fx:id="lbAvisoBuscar" textAlignment="CENTER">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <VBox alignment="CENTER" layoutX="64.0" layoutY="394.0" prefHeight="200.0" prefWidth="1016.0">
+      <VBox alignment="CENTER" layoutX="55.0" layoutY="389.0" prefHeight="200.0" prefWidth="1016.0">
          <children>
             <Label text="DADOS COLETADOS" textAlignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="8.0" />
@@ -146,13 +150,13 @@
                         <Separator orientation="VERTICAL" prefHeight="16.0" />
                         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="240.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onClickCancelar" text="Cancelar">
+                              <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onClickCancelar" text="Cancelar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Button>
                               <Separator prefWidth="16.0" />
-                              <Button mnemonicParsing="false" onAction="#onClickSalvar" text="Salvar">
+                              <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#onClickSalvar" text="Salvar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -165,11 +169,11 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="63.0" layoutY="615.0" prefHeight="36.0" prefWidth="1016.0">
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="610.0" prefHeight="36.0" prefWidth="1016.0">
          <children>
             <Label fx:id="lbAvisoSalvar">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>
@@ -180,6 +184,6 @@
    </padding>
    <stylesheets>
       <URL value="@css/global.css" />
-      <URL value="@css/pesquisar.css" />
+      <URL value="@css/botoes.css" />
    </stylesheets>
 </AnchorPane>

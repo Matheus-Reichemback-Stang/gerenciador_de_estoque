@@ -128,7 +128,8 @@ public class GraficoController {
             lbAviso.setText("Não há dados para produzir gráficos!");
         }
 
-
+        pcCategoriaQtd.getStyleClass().add("pieChart");
+        pcProdutoQtd.getStyleClass().add("pieChart");
     }
 
     @FXML
