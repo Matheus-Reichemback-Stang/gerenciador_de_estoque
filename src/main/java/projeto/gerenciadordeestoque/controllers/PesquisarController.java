@@ -75,9 +75,9 @@ public class PesquisarController {
     @FXML
     public TableColumn<Produto, Integer> colQuantidade;
     @FXML
-    public TableColumn<Produto, Double> colPrecoUnidade;
+    public TableColumn<Produto, String> colPrecoUnidade; // Double
     @FXML
-    public TableColumn<Produto, Double> colPrecoTotal;
+    public TableColumn<Produto, String> colPrecoTotal; // Double
 
     private void setProdutosInObservableList(ObservableList<Produto> listaDeProdutos) throws Exception {
         List<Produto> produtosDB = produtoDAO.buscarTodos();
@@ -119,8 +119,8 @@ public class PesquisarController {
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colPrecoUnidade.setCellValueFactory(new PropertyValueFactory<>("precoUnidade"));
-        colPrecoTotal.setCellValueFactory(new PropertyValueFactory<>("precoTotal"));
+        colPrecoUnidade.setCellValueFactory(new PropertyValueFactory<>("precoUnidadeFormatado")); // precoUnidade
+        colPrecoTotal.setCellValueFactory(new PropertyValueFactory<>("precoTotalFormatado")); // precoTotal
 
         // Definindo so produtos do banco de dados no ObservableList
         setProdutosInObservableList(listaCompleta);

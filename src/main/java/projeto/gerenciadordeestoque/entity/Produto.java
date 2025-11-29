@@ -1,5 +1,8 @@
 package projeto.gerenciadordeestoque.entity;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Produto {
 
     private Long id;
@@ -94,5 +97,15 @@ public class Produto {
 
     public void setPrecoTotal(Double precoUnidade, Integer quantidade) {
         this.precoTotal = precoUnidade * quantidade;
+    }
+
+    public String getPrecoUnidadeFormatado() {
+        NumberFormat nf =  NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return nf.format(this.precoUnidade);
+    }
+
+    public String getPrecoTotalFormatado() {
+        NumberFormat nf =  NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return nf.format(this.precoTotal);
     }
 }
