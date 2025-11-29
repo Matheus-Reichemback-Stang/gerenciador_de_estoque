@@ -51,17 +51,26 @@
          </font>
       </Label>
       <PieChart fx:id="pcProdutoQtd" layoutX="208.0" layoutY="262.0" prefHeight="350.0" prefWidth="350.0" />
-      <Label layoutX="296.0" layoutY="617.0" text="Produto por Quantidade">
+      <Label fx:id="lbProdutoQtd" layoutX="296.0" layoutY="617.0" text="Produto por Quantidade">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <PieChart fx:id="pcCategoriaQtd" layoutX="566.0" layoutY="262.0" prefHeight="350.0" prefWidth="350.0" />
-      <Label layoutX="649.0" layoutY="617.0" text="Categoria por Quantidade">
+      <Label fx:id="lbCategoriaQtd" layoutX="649.0" layoutY="617.0" text="Categoria por Quantidade">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="351.0" prefHeight="55.0" prefWidth="1016.0">
+         <children>
+            <Label fx:id="lbAviso" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />

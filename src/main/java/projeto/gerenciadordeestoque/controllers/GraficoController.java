@@ -10,12 +10,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import projeto.gerenciadordeestoque.DAO.IProdutoDAO;
+import projeto.gerenciadordeestoque.DAO.ProdutoDAO;
 import projeto.gerenciadordeestoque.MainApplication;
+import projeto.gerenciadordeestoque.entity.Produto;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GraficoController {
     private Stage stage;
+
+    private IProdutoDAO produtoDAO = new ProdutoDAO();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -43,7 +49,64 @@ public class GraficoController {
     public PieChart pcCategoriaQtd;
 
     @FXML
-    public void initialize() {
+    public Label lbProdutoQtd;
+    @FXML
+    public Label lbCategoriaQtd;
+    @FXML
+    public Label lbAviso;
+
+    private void setDataCategoriaQtd(PieChart pcCategoriaQtd) throws Exception {
+        List<Produto> produtos = produtoDAO.buscarTodos();
+        if(produtos.size() > 0) {
+            for(Produto produto : produtos) {
+                String categoria = produto.getCategoria();
+                Integer quantidade = produto.getQuantidade();
+                PieChart.Data data = tryFindCategoria(pcCategoriaQtd, categoria);
+                if(data != null) {
+                    data.setPieValue(data.getPieValue() + quantidade);
+                } else {
+                    pcCategoriaQtd.getData().add(new PieChart.Data(categoria, quantidade));
+                }
+
+            }
+        }
+
+    }
+
+    // Verifica se a categoria já está presente em alguma fatia, se sim, apenas acrescenta o valor e não cria uma fatia nova
+    private PieChart.Data tryFindCategoria(PieChart pcCategoriaQtd, String categoria) {
+        for(PieChart.Data data : pcCategoriaQtd.getData()) {
+            if(data.getName().equals(categoria)) {
+                return data;
+            }
+        }
+        return null;
+    }
+
+    private void setDataProdutoQtd(PieChart pcProdutoQtd) throws Exception {
+        List<Produto> produtos = produtoDAO.buscarTodos();
+        if(produtos.size() > 0) {
+            for(Produto produto : produtos) {
+                String produtoNome;
+                if(produto.getMarca() != null){
+                    produtoNome = produto.getNome() + " " + produto.getMarca() + " - " + produto.getQuantidade();
+                } else {
+                    produtoNome = produto.getNome() + " - " + produto.getQuantidade();
+                }
+                Integer quantidade = produto.getQuantidade();
+                pcProdutoQtd.getData().add(new PieChart.Data(produtoNome, quantidade));
+            }
+        }
+    }
+
+    private void setGraphicSize(PieChart grafico, Integer value) {
+        grafico.setPrefSize(value, value);
+        grafico.setMinSize(value, value);
+        grafico.setMaxSize(value, value);
+    }
+
+    @FXML
+    public void initialize() throws Exception {
         // Definindo classes CSS
         graficoPane.getStyleClass().add("screen");
         btnCadastrar.getStyleClass().add("button");
@@ -53,57 +116,18 @@ public class GraficoController {
         btnGrafico.getStyleClass().add("button");
         btnGrafico.getStyleClass().add("active");
 
-        pcCategoriaQtd.getData().addAll(
-                new PieChart.Data("Frutas", 45),
-                new PieChart.Data("Verduras", 30),
-                new PieChart.Data("Legumes", 28),
-                new PieChart.Data("Carnes", 25),
-                new PieChart.Data("Peixes", 15),
-                new PieChart.Data("Laticínios", 22),
-                new PieChart.Data("Grãos", 18),
-                new PieChart.Data("Massas", 12),
-                new PieChart.Data("Pães", 20),
-                new PieChart.Data("Bebidas", 35),
-                new PieChart.Data("Doces", 17),
-                new PieChart.Data("Snacks", 14)
-        );
 
-        pcProdutoQtd.getData().addAll(
-                new PieChart.Data("Maçã", 12),
-                new PieChart.Data("Banana", 18),
-                new PieChart.Data("Uva", 14),
-                new PieChart.Data("Laranja", 10),
+        setGraphicSize(pcCategoriaQtd, 350);
+        setGraphicSize(pcProdutoQtd, 350);
+        setDataCategoriaQtd(pcCategoriaQtd);
+        setDataProdutoQtd(pcProdutoQtd);
 
-                new PieChart.Data("Alface", 8),
-                new PieChart.Data("Couve", 5),
-                new PieChart.Data("Espinafre", 7),
+        if(pcCategoriaQtd.getData().isEmpty() || pcProdutoQtd.getData().isEmpty()) {
+            lbProdutoQtd.setText("");
+            lbCategoriaQtd.setText("");
+            lbAviso.setText("Não há dados para produzir gráficos!");
+        }
 
-                new PieChart.Data("Tomate", 11),
-                new PieChart.Data("Cenoura", 9),
-                new PieChart.Data("Batata", 20),
-
-                new PieChart.Data("Carne Bovina", 13),
-                new PieChart.Data("Carne Suína", 9),
-                new PieChart.Data("Frango", 16),
-                new PieChart.Data("Salmão", 6),
-
-                new PieChart.Data("Leite Integral", 14),
-                new PieChart.Data("Queijo Mussarela", 10),
-                new PieChart.Data("Iogurte Natural", 8),
-
-                new PieChart.Data("Arroz", 25),
-                new PieChart.Data("Feijão", 18),
-
-                new PieChart.Data("Pão Francês", 15),
-                new PieChart.Data("Macarrão Espaguete", 12),
-
-                new PieChart.Data("Refrigerante", 22),
-                new PieChart.Data("Suco de Laranja", 14),
-                new PieChart.Data("Água", 30),
-
-                new PieChart.Data("Chocolate", 10),
-                new PieChart.Data("Biscoito", 13)
-        );
 
     }
 
