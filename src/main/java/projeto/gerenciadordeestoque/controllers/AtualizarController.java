@@ -119,11 +119,7 @@ public class AtualizarController {
     }
 
     private boolean isCampoVazio(TextField tf) {
-        if(tf.getText().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return tf.getText().isEmpty();
     }
 
     private boolean isInteger(TextField tf) {
@@ -185,10 +181,10 @@ public class AtualizarController {
     public void onClickSalvar() throws Exception {
         if(isCampoVazio(tfNome) || isCampoVazio(tfQuantidade) || isCampoVazio(tfPreco)) {
             lbAvisoSalvar.setText("É preciso preencher os campos obrigatórios!");
-        } else if(!isInteger(tfQuantidade)) {
-            lbAvisoSalvar.setText("O campo Quantidade só aceita NÚMEROS INTEIROS!");
-        } else if(!isDouble(tfPreco)) {
-            lbAvisoSalvar.setText("O campo Preço só aceita NÚMEROS DECIMAIS!");
+        } else if(!isInteger(tfQuantidade) || Integer.parseInt(tfQuantidade.getText()) <= 0) {
+            lbAvisoSalvar.setText("O campo Quantidade só aceita um NÚMERO INTEIRO e MAIOR QUE ZERO!");
+        } else if(!isDouble(tfPreco) || Double.parseDouble(tfPreco.getText()) <= 0) {
+            lbAvisoSalvar.setText("O campo Preço Unidade só aceita um NÚMERO DECIMAL e MAIOR QUE ZERO!");
         } else {
             String nome = tfNome.getText();
             String marca = tfMarca.getText();

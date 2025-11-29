@@ -141,22 +141,27 @@ public class CadastrarController {
         }
     }
 
+    private boolean isCampoVazio(TextField tf) {
+        return tf.getText().isEmpty();
+    }
+
     private void clearFields() {
-        tfNome.setText("");
-        tfMarca.setText("");
-        tfQuantidade.setText("");
-        tfPrecoUnidade.setText("");
-        tfCodigo.setText("");
+        tfNome.clear();
+        tfMarca.clear();
+        tfQuantidade.clear();
+        tfPrecoUnidade.clear();
+        tfCodigo.clear();
+        cbCategoria.getSelectionModel().selectFirst();
     }
 
     @FXML
     public void onClickCadastrar() throws Exception {
-        if(tfNome.getText().isEmpty() || tfCodigo.getText().isEmpty() ) {
+        if(isCampoVazio(tfNome) || isCampoVazio(tfCodigo) || isCampoVazio(tfQuantidade) || isCampoVazio(tfPrecoUnidade) ) {
             lbAviso.setText("É necessário preencher todos os campos!");
-        } else if(!isInteger(tfQuantidade)) {
-            lbAviso.setText("O campo Quantidade deve ser preenchido com NÚMEROS INTEIROS!");
-        } else if(!isDouble(tfPrecoUnidade)) {
-            lbAviso.setText("O campo Preço Unidade deve ser preenchido com NÚMEROS DECIMAIS!");
+        } else if(!isInteger(tfQuantidade) || Integer.parseInt(tfQuantidade.getText()) <= 0) {
+            lbAviso.setText("O campo Quantidade deve ser um NÚMERO INTEIRO e MAIOR QUE ZERO!");
+        } else if(!isDouble(tfPrecoUnidade) || Double.parseDouble(tfPrecoUnidade.getText()) <= 0) {
+            lbAviso.setText("O campo Preço Unidade deve ser um NÚMERO DECIMAL e MAIOR QUE ZERO!");
         } else {
             Produto produtoDB = produtoDAO.buscar(tfCodigo.getText());
             if(produtoDB != null) {
@@ -174,6 +179,7 @@ public class CadastrarController {
 
                 if(linhaCadastro == 1) {
                     lbAviso.setText("O produto foi cadastrado com sucesso!");
+                    clearFields();
                 } else {
                     lbAviso.setText("Houve algum erro no cadastro, reinicie o programa!");
                 }

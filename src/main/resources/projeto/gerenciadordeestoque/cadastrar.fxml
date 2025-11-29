@@ -14,6 +14,11 @@
 
 <AnchorPane fx:id="cadastroPane" prefHeight="756.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.gerenciadordeestoque.controllers.CadastrarController">
    <children>
+      <Label fx:id="lbTitle" layoutX="323.0" layoutY="177.0" text="Cadastro de Produtos" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
       <HBox alignment="CENTER" layoutX="54.0" layoutY="40.0" prefHeight="69.0" prefWidth="1016.0">
          <children>
             <Button fx:id="btnCadastrar" mnemonicParsing="false" text="Cadastrar">
@@ -113,16 +118,15 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="lbAviso" layoutX="248.0" layoutY="526.0" prefHeight="36.0" prefWidth="632.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbTitle" layoutX="323.0" layoutY="177.0" text="Cadastro de Produtos" textAlignment="CENTER">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="540.0" prefHeight="45.0" prefWidth="1016.0">
+         <children>
+            <Label fx:id="lbAviso" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
