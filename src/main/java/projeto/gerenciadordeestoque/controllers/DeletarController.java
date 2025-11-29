@@ -9,13 +9,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import projeto.gerenciadordeestoque.DAO.IProdutoDAO;
+import projeto.gerenciadordeestoque.DAO.ProdutoDAO;
 import projeto.gerenciadordeestoque.MainApplication;
+import projeto.gerenciadordeestoque.entity.Produto;
 
 import java.io.IOException;
 
 public class DeletarController {
 
     private Stage stage;
+
+    private IProdutoDAO produtoDAO = new ProdutoDAO();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -39,7 +44,7 @@ public class DeletarController {
 
     // Campos para deletar item
     @FXML
-    public TextField tfID;
+    public TextField tfCodigo;
     @FXML
     public Label lbAviso;
 
@@ -93,5 +98,27 @@ public class DeletarController {
         controller.setStage(stage);
         Scene scene = stage.getScene();
         scene.setRoot(root);
+    }
+
+    @FXML
+    public void onClickDeletar() throws Exception {
+        if(tfCodigo.getText().isEmpty()) {
+            lbAviso.setText("O campo precisa ser preenchido com o código do produto!");
+        } else {
+            String codigo = tfCodigo.getText();
+            Produto proudutoDB = produtoDAO.buscar(codigo);
+
+            if(proudutoDB == null) {
+                lbAviso.setText("Não existe um Produto com o código digitado!");
+            } else {
+                Integer linhaDeletar = produtoDAO.deletar(proudutoDB);
+                if(linhaDeletar == 1) {
+                    lbAviso.setText("Produto removido com sucesso!");
+                    tfCodigo.clear();
+                } else {
+                    lbAviso.setText("Houve um erro ao deletar!");
+                }
+            }
+        }
     }
 }
