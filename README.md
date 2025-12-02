@@ -22,7 +22,7 @@ Isso permite ao usuário visualizar informações importantes e realizar anális
 ## Como Rodar o Projeto
  1. Faça o `git clone` deste repositório.
  2. Abra a pasta do projeto na sua IDE.
- 3. Encontre a classa **MainApplication** seguindo `src/java/projeto/gerenciadordeestoque/MainApplication.class`.
+ 3. Encontre a classe **MainApplication** seguindo `src/java/projeto/gerenciadordeestoque/MainApplication.class`.
  4. Execute a classe `MainApplication.class` e instale as dependências que forem requisitas.
 
 ---
